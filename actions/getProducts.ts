@@ -1,7 +1,7 @@
 import { Product } from "@/types";
 import axios from "axios";
 
-const token = localStorage.getItem("la-api-token");
+const token = window?.localStorage.getItem("la-api-token");
 
 export const getProducts = async (
   setIsLoading: (value: boolean) => void,
