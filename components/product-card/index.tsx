@@ -27,7 +27,7 @@ export default function ProductCard({
         <CardTitle className="flex items-center justify-center min-h-[4rem]">
           {name}
         </CardTitle>
-        <CardDescription className="relative w-full h-60">
+        <CardDescription className="relative w-full h-40">
           <Image
             src={urlImage}
             fill
@@ -38,12 +38,12 @@ export default function ProductCard({
         </CardDescription>
       </CardHeader>
       <CardContent className="flex items-center justify-center">
-        <p className="min-h-[6rem]">{brand}</p>
+        <p className="min-h-[2rem]">{brand}</p>
       </CardContent>
       <CardFooter className="flex items-center justify-between">
         <div>
           <p>Preço</p>
-          <p>{price}</p>
+          <p>R$ {price}</p>
         </div>
 
         <Button size={"lg"} variant={"default"}>

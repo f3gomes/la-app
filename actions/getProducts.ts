@@ -1,7 +1,8 @@
 import { Product } from "@/types";
 import axios from "axios";
 
-const token = window?.localStorage.getItem("la-api-token");
+const token =
+  typeof window !== "undefined" && window.localStorage.getItem("la-api-token");
 
 export const getProducts = async (
   setIsLoading: (value: boolean) => void,
@@ -15,7 +16,7 @@ export const getProducts = async (
 
   try {
     const response = await axios.get(
-      `${process.env.NEXT_PUBLIC_API_URL}`,
+      `${process.env.NEXT_PUBLIC_API_URL}/api/v1/products`,
       config
     );
     const list = (await response.data) as Product[];
