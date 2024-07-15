@@ -9,6 +9,7 @@ import { Navbar } from "@/components/navbar";
 import { Input } from "@/components/ui/input";
 import { Spinner } from "@/components/spinner";
 import { Button } from "@/components/ui/button";
+import { Label } from "@/components/ui/label";
 
 const NewProduct = () => {
   const initialState = {
@@ -70,6 +71,11 @@ const NewProduct = () => {
     });
   };
 
+  const inputClass =
+    "block rounded-t-lg px-2.5 pb-2.5 pt-5 w-full text-sm text-gray-900 bg-gray-50 dark:bg-gray-700 border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-slate-500 focus:outline-none focus:ring-0 focus:border-slate-600 peer";
+  const labelClass =
+    "absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-4 scale-75 top-[0.6rem] z-10 origin-[0] start-2.5 peer-focus:text-slate-600 peer-focus:dark:text-slate-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-4 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto";
+
   return (
     <>
       <Navbar />
@@ -78,51 +84,82 @@ const NewProduct = () => {
           onSubmit={onSubmit}
           className="flex flex-col gap-3 justify-center items-center h-screen"
         >
-          <h1 className="text-2xl font-bold">Novo Produto</h1>
+          <h1 className="text-2xl font-bold">New Product</h1>
 
           <div className="flex flex-col gap-2 w-60">
-            <Input
-              type="text"
-              name="name"
-              placeholder="Nome"
-              value={data.name || ""}
-              onChange={(e) => handleChange(e)}
-            />
+            <div className="relative">
+              <Input
+                type="text"
+                id="name"
+                name="name"
+                placeholder=""
+                value={data.name || ""}
+                onChange={(e) => handleChange(e)}
+                className={inputClass}
+              />
+              <Label htmlFor="name" className={labelClass}>
+                Name
+              </Label>
+            </div>
 
-            <Input
-              type="text"
-              name="brand"
-              placeholder="Marca"
-              value={data.brand || ""}
-              onChange={(e) => handleChange(e)}
-            />
+            <div className="relative">
+              <Input
+                type="text"
+                name="brand"
+                placeholder=""
+                value={data.brand || ""}
+                onChange={(e) => handleChange(e)}
+                className={inputClass}
+              />
+              <Label htmlFor="brand" className={labelClass}>
+                Brand
+              </Label>
+            </div>
 
-            <Input
-              type="text"
-              name="urlImage"
-              placeholder="Imagem(URL)"
-              value={data.urlImage || ""}
-              onChange={(e) => handleChange(e)}
-            />
+            <div className="relative">
+              <Input
+                type="text"
+                name="urlImage"
+                placeholder=""
+                value={data.urlImage || ""}
+                onChange={(e) => handleChange(e)}
+                className={inputClass}
+              />
+              <Label htmlFor="urlImage" className={labelClass}>
+                Image(URL)
+              </Label>
+            </div>
 
-            <Input
-              type="number"
-              name="price"
-              placeholder="Preço R$ (12.99)"
-              value={data.price || 0}
-              onChange={(e) => handleChange(e)}
-            />
+            <div className="relative">
+              <Input
+                type="number"
+                name="price"
+                placeholder=""
+                value={data.price || 0}
+                onChange={(e) => handleChange(e)}
+                className={inputClass}
+              />
+              <Label htmlFor="price" className={labelClass}>
+                Price
+              </Label>
+            </div>
 
-            <Input
-              type="number"
-              name="stock"
-              placeholder="Estoque"
-              value={data.stock || 0}
-              onChange={(e) => handleChange(e)}
-            />
+            <div className="relative">
+              <Input
+                type="number"
+                name="stock"
+                placeholder=""
+                value={data.stock || 0}
+                onChange={(e) => handleChange(e)}
+                className={inputClass}
+              />
+              <Label htmlFor="stock" className={labelClass}>
+                Qty
+              </Label>
+            </div>
 
             <Button type="submit" disabled={isLoading}>
-              {isLoading ? <Spinner /> : <span>Salvar</span>}
+              {isLoading ? <Spinner /> : <span>Save</span>}
             </Button>
           </div>
         </form>
