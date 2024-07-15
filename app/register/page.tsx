@@ -71,29 +71,29 @@ const Register = () => {
           <Input
             type="password"
             name="password"
-            placeholder="Senha"
+            placeholder="Password"
             onChange={(e) => handleChange(e)}
           />
 
           <Input
             type="password"
             name="confirmPassword"
-            placeholder="Confirmar Senha"
+            placeholder="Confirm Password"
             onChange={(e) => handleChange(e)}
           />
 
           <Button type="submit">
-            {isLoading ? <Spinner /> : <span>Registrar</span>}
+            {isLoading ? <Spinner /> : <span>REGISTER</span>}
           </Button>
         </div>
 
         <div className="flex gap-2 text-sm">
-          <span className="text-slate-600">Já possui uma conta?</span>
+          <span className="text-slate-600">Already have an account?</span>
           <Link
             href={"/login"}
             className="hover:font-medium transition duration-200"
           >
-            Entrar
+            Login
           </Link>
         </div>
       </form>

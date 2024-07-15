@@ -42,12 +42,12 @@ export default function ProductCard({
       </CardContent>
       <CardFooter className="flex items-center justify-between">
         <div>
-          <p>Preço</p>
+          <p>Price</p>
           <p>R$ {price}</p>
         </div>
 
         <Button size={"lg"} variant={"default"}>
-          Comprar
+          Edit
         </Button>
       </CardFooter>
     </Card>

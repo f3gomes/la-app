@@ -8,7 +8,7 @@ export const AuthRedirect = () => {
 
   useEffect(() => {
     if (!token) {
-      redirect("/");
+      redirect("/login");
     }
   }, []);
 

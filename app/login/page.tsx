@@ -66,23 +66,23 @@ const Login = () => {
           <Input
             type="password"
             name="password"
-            placeholder="Senha"
+            placeholder="Password"
             onChange={(e) => handleChange(e)}
           />
 
           <Button type="submit">
             {" "}
-            {isLoading ? <Spinner /> : <span>Entrar</span>}
+            {isLoading ? <Spinner /> : <span>LOGIN</span>}
           </Button>
         </div>
 
         <div className="flex gap-2 text-sm">
-          <span className="text-slate-600">Não tem uma conta?</span>
+          <span className="text-slate-600">Don't have an account?</span>
           <Link
             href={"/register"}
             className="hover:font-semibold transition duration-200"
           >
-            Registre-se
+            Signup
           </Link>
         </div>
       </form>
