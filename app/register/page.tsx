@@ -6,14 +6,15 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
-import { toast } from "sonner";
 import { Spinner } from "@/components/spinner";
+import { toast } from "sonner";
 
-const Login = () => {
+const Register = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [data, setData] = useState({
     email: "",
     password: "",
+    confirmPassword: "",
   });
 
   const router = useRouter();
@@ -22,18 +23,22 @@ const Login = () => {
     event.preventDefault();
 
     if (data.email && data.password !== "") {
-      try {
+      if (data.password === data.confirmPassword) {
         setIsLoading(true);
-        const response = await axios.post(
-          `${process.env.NEXT_PUBLIC_API_URL}/user/signin`,
-          data
-        );
-        localStorage.setItem("la-api-token", response.data.token);
-        router.push("/");
-      } catch (err: any) {
-        toast(err.response.data.message);
-      } finally {
-        setIsLoading(false);
+        try {
+          const response = await axios.post(
+            `${process.env.NEXT_PUBLIC_API_URL}/user/signup`,
+            data
+          );
+          router.push("/login");
+        } catch (err: any) {
+          toast(err.response.data.message);
+          console.log(err);
+        } finally {
+          setIsLoading(false);
+        }
+      } else {
+        toast("Password does not match");
       }
     } else {
       toast("Fill in all the fields");
@@ -70,19 +75,25 @@ const Login = () => {
             onChange={(e) => handleChange(e)}
           />
 
+          <Input
+            type="password"
+            name="confirmPassword"
+            placeholder="Confirmar Senha"
+            onChange={(e) => handleChange(e)}
+          />
+
           <Button type="submit">
-            {" "}
-            {isLoading ? <Spinner /> : <span>Entrar</span>}
+            {isLoading ? <Spinner /> : <span>Registrar</span>}
           </Button>
         </div>
 
         <div className="flex gap-2 text-sm">
-          <span className="text-slate-600">Não tem uma conta?</span>
+          <span className="text-slate-600">Já possui uma conta?</span>
           <Link
-            href={"/register"}
-            className="hover:font-semibold transition duration-200"
+            href={"/login"}
+            className="hover:font-medium transition duration-200"
           >
-            Registre-se
+            Entrar
           </Link>
         </div>
       </form>
@@ -90,4 +101,4 @@ const Login = () => {
   );
 };
 
-export default Login;
+export default Register;
