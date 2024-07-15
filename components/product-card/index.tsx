@@ -22,7 +22,7 @@ export default function ProductCard({
   stock,
 }: Product) {
   return (
-    <Card>
+    <Card className="w-72">
       <CardHeader>
         <CardTitle className="flex items-center justify-center min-h-[4rem]">
           {name}
