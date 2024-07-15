@@ -3,9 +3,10 @@
 import React, { useEffect, useState } from "react";
 
 import { Product } from "@/types";
-import { getProducts } from "@/actions/getProducts";
+
 import ProductCard from "../product-card";
 import { AuthRedirect } from "../auth-redirect";
+import { getProducts } from "@/services/getProducts";
 
 export default function ProductsList() {
   const [products, setProducts] = useState<Product[]>([]);
