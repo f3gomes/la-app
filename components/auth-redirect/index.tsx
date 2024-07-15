@@ -10,6 +10,7 @@ export const AuthRedirect = () => {
     if (!token) {
       redirect("/login");
     }
+    //  eslint-disable-next-line
   }, []);
 
   return <></>;

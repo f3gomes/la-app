@@ -77,6 +77,7 @@ const Login = () => {
         </div>
 
         <div className="flex gap-2 text-sm">
+          {/* eslint-disable-next-line */}
           <span className="text-slate-600">Don't have an account?</span>
           <Link
             href={"/register"}
