@@ -12,9 +12,10 @@ import { Button } from "@/components/ui/button";
 import { Label } from "@/components/ui/label";
 import { inputClass, labelClass } from "@/app/new-product/page";
 import { getProductById } from "@/services/getProductById";
+import { ModalDelete } from "../modal-delete";
 import { Product } from "@/types";
 
-interface EditProductProps {
+export interface EditProductProps {
   id: string;
 }
 
@@ -42,6 +43,8 @@ const EditProduct = ({ id }: EditProductProps) => {
       (chave) => currentState[chave] !== initialState[chave]
     );
   }
+
+  const handleDeleteDialog = () => { };
 
   const onSubmit = async (event: any) => {
     event.preventDefault();
@@ -97,7 +100,11 @@ const EditProduct = ({ id }: EditProductProps) => {
           onSubmit={onSubmit}
           className="flex flex-col gap-3 justify-center items-center h-screen"
         >
-          <h1 className="text-2xl font-bold">Edit Product</h1>
+          <div className="flex w-60 relative">
+            <h1 className="text-2xl font-bold ml-1">Edit Product</h1>
+
+            <ModalDelete id={id} />
+          </div>
 
           <div className="flex flex-col gap-2 w-60">
             <div className="relative">
