@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 import axios from "axios";
 import { toast } from "sonner";
@@ -10,13 +10,15 @@ import { Input } from "@/components/ui/input";
 import { Spinner } from "@/components/spinner";
 import { Button } from "@/components/ui/button";
 import { Label } from "@/components/ui/label";
+import { inputClass, labelClass } from "@/app/new-product/page";
+import { getProductById } from "@/services/getProductById";
+import { Product } from "@/types";
 
-export const inputClass =
-  "block rounded-t-lg px-2.5 pb-2.5 pt-5 w-full text-sm text-gray-900 bg-gray-50 dark:bg-gray-700 border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-slate-500 focus:outline-none focus:ring-0 focus:border-slate-600 peer";
-export const labelClass =
-  "absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-4 scale-75 top-[0.6rem] z-10 origin-[0] start-2.5 peer-focus:text-slate-600 peer-focus:dark:text-slate-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-4 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto";
+interface EditProductProps {
+  id: string;
+}
 
-const NewProduct = () => {
+const EditProduct = ({ id }: EditProductProps) => {
   const initialState = {
     name: "",
     brand: "",
@@ -25,8 +27,9 @@ const NewProduct = () => {
     stock: 0,
   };
 
-  const [isLoading, setIsLoading] = useState(false);
-  const [data, setData] = useState(initialState);
+  const [isLoading, setIsLoading] = useState(true);
+  const [data, setData] = useState<any>({});
+  const [error, setError] = useState("");
 
   const router = useRouter();
 
@@ -50,8 +53,8 @@ const NewProduct = () => {
     if (checkValues(data, initialState)) {
       setIsLoading(true);
       try {
-        const response = await axios.post(
-          `${process.env.NEXT_PUBLIC_API_URL}/api/v1/products`,
+        const response = await axios.patch(
+          `${process.env.NEXT_PUBLIC_API_URL}/api/v1/products/${id}`,
           data,
           config
         );
@@ -76,6 +79,16 @@ const NewProduct = () => {
     });
   };
 
+  useEffect(() => {
+    getProductById(id, setIsLoading, setData, setError);
+  }, []);
+
+  if (isLoading) {
+    <div>
+      <Spinner />{" "}
+    </div>;
+  }
+
   return (
     <>
       <Navbar />
@@ -84,7 +97,7 @@ const NewProduct = () => {
           onSubmit={onSubmit}
           className="flex flex-col gap-3 justify-center items-center h-screen"
         >
-          <h1 className="text-2xl font-bold">New Product</h1>
+          <h1 className="text-2xl font-bold">Edit Product</h1>
 
           <div className="flex flex-col gap-2 w-60">
             <div className="relative">
@@ -93,7 +106,7 @@ const NewProduct = () => {
                 id="name"
                 name="name"
                 placeholder=""
-                value={data.name || ""}
+                value={data?.name || ""}
                 onChange={(e) => handleChange(e)}
                 className={inputClass}
               />
@@ -107,7 +120,7 @@ const NewProduct = () => {
                 type="text"
                 name="brand"
                 placeholder=""
-                value={data.brand || ""}
+                value={data?.brand || ""}
                 onChange={(e) => handleChange(e)}
                 className={inputClass}
               />
@@ -121,7 +134,7 @@ const NewProduct = () => {
                 type="text"
                 name="urlImage"
                 placeholder=""
-                value={data.urlImage || ""}
+                value={data?.urlImage || ""}
                 onChange={(e) => handleChange(e)}
                 className={inputClass}
               />
@@ -135,7 +148,7 @@ const NewProduct = () => {
                 type="number"
                 name="price"
                 placeholder=""
-                value={data.price || 0}
+                value={data?.price || 0}
                 onChange={(e) => handleChange(e)}
                 className={inputClass}
               />
@@ -149,7 +162,7 @@ const NewProduct = () => {
                 type="number"
                 name="stock"
                 placeholder=""
-                value={data.stock || 0}
+                value={data?.stock || 0}
                 onChange={(e) => handleChange(e)}
                 className={inputClass}
               />
@@ -168,4 +181,4 @@ const NewProduct = () => {
   );
 };
 
-export default NewProduct;
+export default EditProduct;

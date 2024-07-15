@@ -12,6 +12,7 @@ import {
   CardTitle,
 } from "../ui/card";
 import { Button } from "../ui/button";
+import Link from "next/link";
 
 export default function ProductCard({
   id,
@@ -46,9 +47,11 @@ export default function ProductCard({
           <p>R$ {price}</p>
         </div>
 
-        <Button size={"lg"} variant={"default"}>
-          Edit
-        </Button>
+        <Link href={`/product/${id}`}>
+          <Button size={"lg"} variant={"default"}>
+            Edit
+          </Button>
+        </Link>
       </CardFooter>
     </Card>
   );
