@@ -29,6 +29,7 @@ const Login = () => {
           data
         );
         localStorage.setItem("la-api-token", response.data.token);
+        localStorage.setItem("la-api-user", data.email);
         router.push("/");
       } catch (err: any) {
         toast(err.response.data.message);
