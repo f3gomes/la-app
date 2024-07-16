@@ -85,7 +85,7 @@ const EditProduct = ({ id }: EditProductProps) => {
   };
 
   useEffect(() => {
-    getProductById(id, setIsLoading, setData, setError);
+    getProductById(id, setIsLoading, setData);
     // eslint-disable-next-line
   }, []);
 

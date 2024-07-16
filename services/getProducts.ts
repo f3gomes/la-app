@@ -1,13 +1,13 @@
-import { Product } from "@/types";
 import axios from "axios";
+import { toast } from "sonner";
+import { Product } from "@/types";
 
 const token =
   typeof window !== "undefined" && window.localStorage.getItem("la-api-token");
 
 export const getProducts = async (
   setIsLoading: (value: boolean) => void,
-  setProducts: (value: any) => void,
-  setError: (value: string) => void
+  setProducts: (value: any) => void
 ) => {
   setIsLoading(true);
   const config = {
@@ -21,13 +21,8 @@ export const getProducts = async (
     );
     const list = (await response.data) as Product[];
     setProducts(list);
-  } catch (e: any) {
-    if (e.name === "AbortError") {
-      console.log("Aborted");
-      return;
-    }
-
-    setError(e);
+  } catch (err: any) {
+    toast.error(err.response.data.message);
   } finally {
     setIsLoading(false);
   }

@@ -1,9 +1,7 @@
 "use client";
 
 import React, { useEffect, useState } from "react";
-
 import { Product } from "@/types";
-
 import ProductCard from "../product-card";
 import { AuthRedirect } from "../auth-redirect";
 import { getProducts } from "@/services/getProducts";
@@ -12,10 +10,9 @@ import { Spinner } from "../spinner";
 export default function ProductsList() {
   const [products, setProducts] = useState<Product[]>([]);
   const [isLoading, setIsLoading] = useState(false);
-  const [error, setError] = useState("");
 
   useEffect(() => {
-    getProducts(setIsLoading, setProducts, setError);
+    getProducts(setIsLoading, setProducts);
   }, []);
 
   if (products.length === 0 && !isLoading) {

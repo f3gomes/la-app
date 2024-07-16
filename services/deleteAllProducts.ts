@@ -1,11 +1,11 @@
 import axios from "axios";
+import { toast } from "sonner";
 
 const token =
   typeof window !== "undefined" && window.localStorage.getItem("la-api-token");
 
 export const deleteAllProducts = async (
-  setIsLoading: (value: boolean) => void,
-  setError: (value: string) => void
+  setIsLoading: (value: boolean) => void
 ) => {
   setIsLoading(true);
   const config = {
@@ -17,13 +17,11 @@ export const deleteAllProducts = async (
       `${process.env.NEXT_PUBLIC_API_URL}/api/v1/products/delete/all`,
       config
     );
-  } catch (e: any) {
-    if (e.name === "AbortError") {
-      console.log("Aborted");
-      return;
-    }
 
-    setError(e);
+    toast.success(response?.data?.message);
+    return response;
+  } catch (err: any) {
+    toast.error(err.response.data.message);
   } finally {
     setIsLoading(false);
   }

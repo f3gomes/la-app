@@ -1,39 +1,23 @@
 "use client";
 
-import {
-  AlertDialog,
-  AlertDialogAction,
-  AlertDialogCancel,
-  AlertDialogContent,
-  AlertDialogDescription,
-  AlertDialogFooter,
-  AlertDialogHeader,
-  AlertDialogTitle,
-  AlertDialogTrigger,
-} from "@/components/ui/alert-dialog";
-import { deleteProductById } from "@/services/deleteProductById";
-import { Trash2Icon } from "lucide-react";
 import { useState } from "react";
-import { EditProductProps } from "../product-edit";
+import { Trash2Icon } from "lucide-react";
 import { useRouter } from "next/navigation";
-import { toast } from "sonner";
+import { deleteProductById } from "@/services/deleteProductById";
+import { AlertDialog, AlertDialogAction, AlertDialogCancel, AlertDialogContent, AlertDialogDescription, AlertDialogFooter, AlertDialogHeader, AlertDialogTitle, AlertDialogTrigger } from "@/components/ui/alert-dialog";
+
+import { EditProductProps } from "../product-edit";
 
 export function ModalDelete({ id }: EditProductProps) {
   const [isLoading, setIsLoading] = useState(false);
-  const [error, setError] = useState("");
 
   const router = useRouter();
 
   const handleDelete = async () => {
-    try {
-      setIsLoading(true);
-      await deleteProductById(id, setIsLoading, setError);
-      toast("Successfully deleted product");
+    const resp = await deleteProductById(id, setIsLoading);
+
+    if (resp) {
       router.push("/");
-    } catch (err: any) {
-      toast(err.response.data.message);
-    } finally {
-      setIsLoading(false);
     }
   };
 
