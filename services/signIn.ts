@@ -13,7 +13,6 @@ export const signIn = async (
     );
 
     localStorage.setItem("la-api-token", response.data.token);
-    localStorage.setItem("la-api-user", data.email);
 
     toast(response.data.message);
     return response;

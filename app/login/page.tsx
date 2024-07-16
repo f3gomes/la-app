@@ -25,6 +25,7 @@ const Login = () => {
       const resp = await signIn(data, setIsLoading);
 
       if (resp) {
+        localStorage.setItem("la-api-user", data.email);
         router.push("/");
       }
     } else {
