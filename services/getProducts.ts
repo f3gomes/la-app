@@ -2,10 +2,8 @@ import axios from "axios";
 import { toast } from "sonner";
 import { Product } from "@/types";
 
-const token =
-  typeof window !== "undefined" && window.localStorage.getItem("la-api-token");
-
 export const getProducts = async (
+  token: string,
   setIsLoading: (value: boolean) => void,
   setProducts: (value: any) => void
 ) => {

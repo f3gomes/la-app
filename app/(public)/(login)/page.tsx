@@ -1,13 +1,13 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { SyntheticEvent, useState } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { toast } from "sonner";
 import { Spinner } from "@/components/spinner";
-import { signIn } from "@/services/signIn";
+import { signIn } from "next-auth/react";
 
 const Login = () => {
   const [isLoading, setIsLoading] = useState(false);
@@ -18,15 +18,25 @@ const Login = () => {
 
   const router = useRouter();
 
-  const onSubmit = async (event: any) => {
+  const onSubmit = async (event: SyntheticEvent) => {
     event.preventDefault();
 
-    if (data.email && data.password !== "") {
-      const resp = await signIn(data, setIsLoading);
+    const { email, password } = data;
 
-      if (resp) {
-        router.push("/home");
+    if (data.email && data.password !== "") {
+      const result = await signIn("credentials", {
+        email,
+        password,
+        redirect: false,
+      });
+
+      if (result?.error) {
+        console.log(result);
+        return;
       }
+
+      router.replace("/home", { scroll: false });
+      localStorage.setItem("la-api-user", data?.email);
     } else {
       toast("Fill in all the fields");
     }

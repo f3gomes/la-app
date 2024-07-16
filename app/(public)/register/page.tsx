@@ -34,7 +34,7 @@ const Register = () => {
         const resp = await signUp(data, setIsLoading);
 
         if (resp) {
-          router.push("/login");
+          router.push("/");
         }
       } else {
         toast("Password does not match");

@@ -6,12 +6,13 @@ import { getProducts } from "@/services/getProducts";
 import { Spinner } from "../spinner";
 import ProductCard from "../product-card";
 
-export default function ProductsList() {
+export default function ProductsList({ session }: any) {
   const [products, setProducts] = useState<Product[]>([]);
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
-    getProducts(setIsLoading, setProducts);
+    localStorage.setItem("la-api-token", session.token);
+    getProducts(session.token, setIsLoading, setProducts);
   }, []);
 
   if (products.length === 0 && !isLoading) {
