@@ -18,7 +18,7 @@ export default function ProductsList() {
     getProducts(setIsLoading, setProducts, setError);
   }, []);
 
-  if (products.length === 0) {
+  if (products.length === 0 && !isLoading) {
     return (
       <section className="flex gap-4 m-4 flex-wrap justify-center">
         <h1>No products</h1>

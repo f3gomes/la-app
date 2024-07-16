@@ -30,9 +30,9 @@ export const UserMenu = () => {
           <Link href={"/new-product"}>
             <MenubarItem>Add New Product</MenubarItem>
           </Link>
-          <MenubarItem className="text-slate-400">
-            Load test products
-          </MenubarItem>
+          <Link href={"/load-all"}>
+            <MenubarItem>Load test products</MenubarItem>
+          </Link>
 
           <Link href={"/delete-all"}>
             <MenubarItem>Remove all products</MenubarItem>
