@@ -1,13 +1,13 @@
 "use client";
 
 import React, { SyntheticEvent, useState } from "react";
+import { toast } from "sonner";
 import Link from "next/link";
+import { signIn } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import { Input } from "@/components/ui/input";
-import { Button } from "@/components/ui/button";
-import { toast } from "sonner";
 import { Spinner } from "@/components/spinner";
-import { signIn } from "next-auth/react";
+import { Button } from "@/components/ui/button";
 
 const Login = () => {
   const [isLoading, setIsLoading] = useState(false);
@@ -24,19 +24,28 @@ const Login = () => {
     const { email, password } = data;
 
     if (data.email && data.password !== "") {
-      const result = await signIn("credentials", {
-        email,
-        password,
-        redirect: false,
-      });
+      try {
+        setIsLoading(true);
 
-      if (result?.error) {
-        console.log(result);
-        return;
+        const result = await signIn("credentials", {
+          email,
+          password,
+          redirect: false,
+        });
+
+        if (result?.error) {
+          toast("Invalid credentials");
+          console.log(result);
+          return;
+        }
+
+        router.replace("/home", { scroll: false });
+        localStorage.setItem("la-api-user", data?.email);
+      } catch (err: any) {
+        console.log(err);
+      } finally {
+        setIsLoading(false);
       }
-
-      router.replace("/home", { scroll: false });
-      localStorage.setItem("la-api-user", data?.email);
     } else {
       toast("Fill in all the fields");
     }
@@ -72,8 +81,7 @@ const Login = () => {
             onChange={(e) => handleChange(e)}
           />
 
-          <Button type="submit">
-            {" "}
+          <Button type="submit" disabled={isLoading}>
             {isLoading ? <Spinner /> : <span>LOGIN</span>}
           </Button>
         </div>

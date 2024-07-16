@@ -82,7 +82,7 @@ const Register = () => {
         <div className="flex gap-2 text-sm">
           <span className="text-slate-600">Already have an account?</span>
           <Link
-            href={"/login"}
+            href={"/"}
             className="hover:font-medium transition duration-200"
           >
             Login
