@@ -12,7 +12,8 @@ export const signIn = async (
       data
     );
 
-    localStorage.setItem("la-api-token", response.data.token);
+    localStorage.setItem("la-api-user", data?.email);
+    localStorage.setItem("la-api-token", response?.data?.token);
 
     toast(response.data.message);
     return response;

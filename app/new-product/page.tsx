@@ -70,7 +70,9 @@ const NewProduct = () => {
       } catch (err: any) {
         toast(err.response.data.message);
         toast(
-          err.response.data.errors.map((item: string) => <div>{item}</div>)
+          err.response.data.errors.map((item: string) => (
+            <div key={item}>{item}</div>
+          ))
         );
         console.log(err);
       } finally {
