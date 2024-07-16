@@ -5,7 +5,6 @@ import { Product } from "@/types";
 import { getProducts } from "@/services/getProducts";
 import { Spinner } from "../spinner";
 import ProductCard from "../product-card";
-import { AuthRedirect } from "../auth-redirect";
 
 export default function ProductsList() {
   const [products, setProducts] = useState<Product[]>([]);
@@ -25,8 +24,6 @@ export default function ProductsList() {
 
   return (
     <>
-      <AuthRedirect />
-
       <section className="flex gap-4 m-4 flex-wrap justify-center">
         {isLoading ? (
           <div>
