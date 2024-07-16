@@ -17,9 +17,7 @@ export const UserMenu = () => {
     typeof window !== "undefined" && window.localStorage.getItem("la-api-user");
 
   const handleLogout = () => {
-    localStorage.removeItem("la-api-token");
-    localStorage.removeItem("la-api-user");
-    router.push("/");
+    router.push("/logout");
   };
 
   return (
