@@ -1,13 +1,13 @@
 "use client";
 
 import React, { useState } from "react";
-import axios from "axios";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { toast } from "sonner";
 import { Spinner } from "@/components/spinner";
+import { signIn } from "@/services/signIn";
 
 const Login = () => {
   const [isLoading, setIsLoading] = useState(false);
@@ -22,19 +22,10 @@ const Login = () => {
     event.preventDefault();
 
     if (data.email && data.password !== "") {
-      try {
-        setIsLoading(true);
-        const response = await axios.post(
-          `${process.env.NEXT_PUBLIC_API_URL}/user/signin`,
-          data
-        );
-        localStorage.setItem("la-api-token", response.data.token);
-        localStorage.setItem("la-api-user", data.email);
+      const resp = await signIn(data, setIsLoading);
+
+      if (resp) {
         router.push("/");
-      } catch (err: any) {
-        toast(err.response.data.message);
-      } finally {
-        setIsLoading(false);
       }
     } else {
       toast("Fill in all the fields");
