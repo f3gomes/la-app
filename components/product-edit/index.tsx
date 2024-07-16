@@ -98,7 +98,7 @@ const EditProduct = ({ id }: EditProductProps) => {
   return (
     <>
       <Navbar />
-      <div className="h-screen -mt-16">
+      <div className="h-screen -mt-20">
         <form
           onSubmit={onSubmit}
           className="flex flex-col gap-3 justify-center items-center h-screen"
