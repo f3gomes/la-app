@@ -43,6 +43,15 @@ const NewProduct = () => {
   const onSubmit = async (event: any) => {
     event.preventDefault();
 
+    const price = data.price;
+    const stock = data.stock;
+
+    setData({
+      ...data,
+      price: Number(price),
+      stock: Number(stock),
+    });
+
     const config = {
       headers: { Authorization: `Bearer ${token}` },
     };
@@ -60,6 +69,9 @@ const NewProduct = () => {
         setData(initialState);
       } catch (err: any) {
         toast(err.response.data.message);
+        toast(
+          err.response.data.errors.map((item: string) => <div>{item}</div>)
+        );
         console.log(err);
       } finally {
         setIsLoading(false);
