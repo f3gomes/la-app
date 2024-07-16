@@ -33,7 +33,10 @@ export const UserMenu = () => {
           <MenubarItem className="text-slate-400">
             Load test products
           </MenubarItem>
-          <MenubarItem>Remove all products</MenubarItem>
+
+          <Link href={"/delete-all"}>
+            <MenubarItem>Remove all products</MenubarItem>
+          </Link>
           <MenubarItem className="text-slate-400">Logs</MenubarItem>
           <MenubarItem onClick={handleLogout}>Logout</MenubarItem>
         </MenubarContent>
