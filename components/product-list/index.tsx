@@ -2,14 +2,14 @@
 
 import React, { useEffect, useState } from "react";
 import { Product } from "@/types";
-import ProductCard from "../product-card";
-import { AuthRedirect } from "../auth-redirect";
 import { getProducts } from "@/services/getProducts";
 import { Spinner } from "../spinner";
+import ProductCard from "../product-card";
+import { AuthRedirect } from "../auth-redirect";
 
 export default function ProductsList() {
   const [products, setProducts] = useState<Product[]>([]);
-  const [isLoading, setIsLoading] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     getProducts(setIsLoading, setProducts);
