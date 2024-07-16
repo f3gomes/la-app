@@ -12,9 +12,9 @@ import { Button } from "@/components/ui/button";
 import { Label } from "@/components/ui/label";
 
 const inputClass =
-  "block rounded-t-lg px-2.5 pb-2.5 pt-5 w-full text-sm text-gray-900 bg-gray-50 dark:bg-gray-700 border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-slate-500 focus:outline-none focus:ring-0 focus:border-slate-600 peer";
+  "block rounded-t-lg px-2.5 pb-2.5 pt-5 w-72 h-12 text-sm text-gray-900 bg-gray-50 dark:bg-gray-700 border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-slate-500 focus:outline-none focus:ring-0 focus:border-slate-600 peer";
 const labelClass =
-  "absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-4 scale-75 top-[0.6rem] z-10 origin-[0] start-2.5 peer-focus:text-slate-600 peer-focus:dark:text-slate-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-4 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto";
+  "absolute text-sm top-4 text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-4 scale-75 z-10 origin-[0] start-2.5 peer-focus:text-slate-600 peer-focus:dark:text-slate-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-4 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto";
 
 const NewProduct = () => {
   const initialState = {
@@ -86,7 +86,7 @@ const NewProduct = () => {
         >
           <h1 className="text-2xl font-bold">New Product</h1>
 
-          <div className="flex flex-col gap-2 w-60">
+          <div className="flex flex-col gap-3 w-full justify-center items-center">
             <div className="relative">
               <Input
                 type="text"
@@ -158,7 +158,7 @@ const NewProduct = () => {
               </Label>
             </div>
 
-            <Button type="submit" disabled={isLoading}>
+            <Button type="submit" disabled={isLoading} className="w-72">
               {isLoading ? <Spinner /> : <span>Save</span>}
             </Button>
           </div>
