@@ -16,7 +16,7 @@ const DeleteAllProductsPage = () => {
     const resp = await loadAllProducts(setIsLoading);
 
     if (resp) {
-      router.push("/");
+      router.push("/home");
     }
   };
 

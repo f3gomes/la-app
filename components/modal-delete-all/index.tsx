@@ -16,7 +16,7 @@ export function ModalDeleteAll() {
     const resp = await deleteAllProducts(setIsLoading);
 
     if (resp) {
-      router.push("/");
+      router.push("/home");
     }
   };
 

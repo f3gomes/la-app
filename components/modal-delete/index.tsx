@@ -17,7 +17,7 @@ export function ModalDelete({ id }: EditProductProps) {
     const resp = await deleteProductById(id, setIsLoading);
 
     if (resp) {
-      router.push("/");
+      router.push("/home");
     }
   };
 

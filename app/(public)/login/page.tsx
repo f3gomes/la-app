@@ -25,7 +25,7 @@ const Login = () => {
       const resp = await signIn(data, setIsLoading);
 
       if (resp) {
-        router.push("/");
+        router.push("/home");
       }
     } else {
       toast("Fill in all the fields");
