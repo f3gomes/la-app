@@ -1,13 +1,13 @@
 "use client";
 
 import React, { useState } from "react";
-import axios from "axios";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Spinner } from "@/components/spinner";
 import { toast } from "sonner";
+import { signUp } from "@/services/signUp";
 
 const Register = () => {
   const [isLoading, setIsLoading] = useState(false);
@@ -19,23 +19,22 @@ const Register = () => {
 
   const router = useRouter();
 
+  const handleChange = (event: any) => {
+    setData({
+      ...data,
+      [event.target.name]: event.target.value,
+    });
+  };
+
   const onSubmit = async (event: any) => {
     event.preventDefault();
 
     if (data.email && data.password !== "") {
       if (data.password === data.confirmPassword) {
-        setIsLoading(true);
-        try {
-          const response = await axios.post(
-            `${process.env.NEXT_PUBLIC_API_URL}/user/signup`,
-            data
-          );
+        const resp = await signUp(data, setIsLoading);
+
+        if (resp) {
           router.push("/login");
-        } catch (err: any) {
-          toast(err.response.data.message);
-          console.log(err);
-        } finally {
-          setIsLoading(false);
         }
       } else {
         toast("Password does not match");
@@ -43,13 +42,6 @@ const Register = () => {
     } else {
       toast("Fill in all the fields");
     }
-  };
-
-  const handleChange = (event: any) => {
-    setData({
-      ...data,
-      [event.target.name]: event.target.value,
-    });
   };
 
   return (
