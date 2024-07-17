@@ -13,6 +13,7 @@ export default function ProductsList({ session }: any) {
   useEffect(() => {
     localStorage.setItem("la-api-token", session.token);
     getProducts(session.token, setIsLoading, setProducts);
+    // eslint-disable-next-line
   }, []);
 
   if (products.length === 0 && !isLoading) {
