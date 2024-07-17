@@ -1,7 +1,6 @@
-import { NextAuthOptions } from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
 
-export const nextAuthOptions: NextAuthOptions = {
+export const authOptions = {
   providers: [
     CredentialsProvider({
       name: "credentials",
@@ -36,11 +35,11 @@ export const nextAuthOptions: NextAuthOptions = {
     signIn: "/",
   },
   callbacks: {
-    async jwt({ token, user }) {
+    async jwt({ token, user }: any) {
       user && (token.user = user);
       return token;
     },
-    async session({ session, token }) {
+    async session({ session, token }: any) {
       session = token.user as any;
       return session;
     },
